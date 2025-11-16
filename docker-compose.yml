@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  bot:
+    build: .
+    container_name: vk_monitor_bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+    environment:
+      - VK_TOKEN=${VK_TOKEN}
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+      - CHECK_INTERVAL=${CHECK_INTERVAL:-600}
+      - POSTS_COUNT=${POSTS_COUNT:-20}
+      - COMMENTS_COUNT=${COMMENTS_COUNT:-100}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+
